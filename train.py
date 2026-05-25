@@ -45,5 +45,5 @@ model.fit(X_train, y_train)
 
 
 pickle.dump(model, open('housing.pkl', 'wb'))
-pickle.dump(tf, open('columns.pkl', 'wb'))
+pickle.dump(columns, open('columns.pkl', 'wb'))
 print("Model Saved")
