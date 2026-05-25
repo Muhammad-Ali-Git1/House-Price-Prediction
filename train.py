@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
-import pickle
-
+# Save model
+import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 
@@ -42,8 +42,7 @@ model = RandomForestRegressor(
 # Train
 model.fit(X_train, y_train)
 
-# Save model
-import joblib
+
 
 joblib.dump(model, "housing.pkl", compress=4)
 joblib.dump(list(X.columns), "columns.pkl", compress=4)
