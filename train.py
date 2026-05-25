@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-# Save model
+import pickle
 import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
@@ -44,6 +44,6 @@ model.fit(X_train, y_train)
 
 
 
-joblib.dump(model, "housing.pkl", compress=4)
-joblib.dump(list(X.columns), "columns.pkl", compress=4)
+pickle.dump(model, open('housing.pkl', 'wb'))
+pickle.dump(tf, open('columns.pkl', 'wb'))
 print("Model Saved")
