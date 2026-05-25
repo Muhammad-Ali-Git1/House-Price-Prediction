@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import joblib
+import pickle
 
 
 st.set_page_config(
@@ -11,8 +11,8 @@ st.set_page_config(
 )
 
 
-model = joblib.load("housing.pkl")
-columns = joblib.load("columns.pkl")
+model = pickle.load(open('housing.pkl', 'rb'))
+columns= pickle.load(open('columns.pkl', 'rb'))
 
 
 st.markdown("""
