@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import joblib
+
 
 st.set_page_config(
     page_title="California Housing Predictor",
@@ -8,7 +10,6 @@ st.set_page_config(
     layout="wide"
 )
 
-import joblib
 
 model = joblib.load("housing.pkl")
 columns = joblib.load("columns.pkl")
