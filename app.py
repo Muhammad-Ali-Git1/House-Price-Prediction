@@ -1,9 +1,6 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import pickle
-
-# ---------------- PAGE CONFIG ----------------
 
 st.set_page_config(
     page_title="California Housing Predictor",
@@ -11,12 +8,11 @@ st.set_page_config(
     layout="wide"
 )
 
-# ---------------- LOAD MODEL ----------------
+import joblib
 
-model = pickle.load(open("housing.pkl", "rb"))
-columns = pickle.load(open("columns.pkl", "rb"))
+model = joblib.load("housing.pkl")
+columns = joblib.load("columns.pkl")
 
-# ---------------- CUSTOM CSS ----------------
 
 st.markdown("""
 <style>
@@ -63,7 +59,6 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# ---------------- SIDEBAR ----------------
 
 st.sidebar.title("🏠 Home Details")
 
@@ -134,14 +129,10 @@ latitude = st.sidebar.slider(
     37.0
 )
 
-# ---------------- LOG TRANSFORM ----------------
-
 rooms_log = np.log(rooms)
 bedrooms_log = np.log(bedrooms)
 population_log = np.log(population)
 households_log = np.log(households)
-
-# ---------------- INPUT DATA ----------------
 
 input_data = {
     "longitude": longitude,
@@ -168,8 +159,6 @@ for col in ocean_columns:
 selected_col = f"ocean_proximity_{location}"
 input_data[selected_col] = 1
 
-# ---------------- DATAFRAME ----------------
-
 input_df = pd.DataFrame([input_data])
 
 input_df = input_df.reindex(
@@ -177,19 +166,13 @@ input_df = input_df.reindex(
     fill_value=0
 )
 
-# ---------------- PREDICTION ----------------
 
 prediction = model.predict(input_df)[0]
-
-# ---------------- MAIN UI ----------------
-
 st.title("🏠 California Housing Price Predictor")
 
 st.write(
     "Get an estimated house price based on location and property details."
 )
-
-# ---------------- PRICE CARD ----------------
 
 st.markdown(f"""
 <div class="big-card">
@@ -214,8 +197,6 @@ This estimate is based on:
 """, unsafe_allow_html=True)
 
 st.write("")
-
-# ---------------- SUMMARY CARDS ----------------
 
 col1, col2, col3, col4 = st.columns(4)
 
@@ -242,7 +223,6 @@ with col3:
     <div class="value">{rooms}</div>
     </div>
     """, unsafe_allow_html=True)
-
 with col4:
     st.markdown(f"""
     <div class="small-card">
@@ -252,8 +232,6 @@ with col4:
     """, unsafe_allow_html=True)
 
 st.write("")
-
-# ---------------- EXTRA INFO ----------------
 
 st.info(
     "This prediction is generated using Machine Learning based on California housing data."

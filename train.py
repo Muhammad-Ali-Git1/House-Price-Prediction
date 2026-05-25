@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-import pickle
 
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
@@ -34,15 +33,17 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 # Model
 model = RandomForestRegressor(
-    n_estimators=100,
-    random_state=42
+    n_estimators=50,
+    random_state=42,
+    max_depth=10
 )
 
 # Train
 model.fit(X_train, y_train)
 
 # Save model
-pickle.dump(model, open("housing.pkl", "wb"))
-pickle.dump(X.columns, open("columns.pkl", "wb"))
+import joblib
 
+joblib.dump(model, "housing.pkl", compress=4)
+joblib.dump(list(X.columns), "columns.pkl", compress=4)
 print("Model Saved")
