@@ -32,5 +32,5 @@ jobs:
     # 4. Run your Python script
     # Replace 'main.py' with the actual name of your script (e.g., app.py, train.py, model.py)
     - name: Run prediction model
-      run: |
+      run: python train.py --data path/to/data.csv
         python train.py
