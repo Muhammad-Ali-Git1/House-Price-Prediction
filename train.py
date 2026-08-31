@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 
 # Load dataset
-df = pd.read_csv("housing.csv")
+df = pd.read_pickle("housing.pkl")
 
 # Remove null values
 df.dropna(inplace=True)
