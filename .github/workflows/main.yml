@@ -33,4 +33,4 @@ jobs:
     # Replace 'main.py' with the actual name of your script (e.g., app.py, train.py, model.py)
     - name: Run prediction model
       run: |
-        python main.py
+        python train.py
